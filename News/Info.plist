@@ -39,12 +39,12 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>UIAppFonts</key>
-    <array>
-        <string>ToyotaTypeBook.ttf</string>
-        <string>ToyotaTypeSemibold.ttf</string>
-    </array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>ToyotaTypeBook.ttf</string>
+		<string>ToyotaTypeSemibold.ttf</string>
+	</array>
 	<key>server_url</key>
-	<string>https://newsapi.org/v2/everything</string>
+	<string>https://newsapi.org/v2</string>
 </dict>
 </plist>
