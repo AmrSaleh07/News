@@ -25,6 +25,7 @@ class AllNewsVC: UIViewController {
         layout.tableView.delegate = self
         layout.searchBar.text = searchTerm
         layout.refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        layout.searchBar.delegate = self
         refreshData()
         setupRX()
         self.title = "All News"
@@ -63,6 +64,10 @@ extension AllNewsVC {
             self?.layout.tableView.reloadData()
         }).disposed(by: disposeBag)
     }
+    
+    func hideKeyboard() {
+        self.view.endEditing(true)
+    }
 }
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
@@ -89,5 +94,17 @@ extension AllNewsVC: UIScrollViewDelegate {
             }
             layout.tableView.tableFooterView?.isHidden = !newsVM.isMoreDataAvailable
         }
+    }
+}
+
+// MARK: - UISearchBarDelegate
+extension AllNewsVC: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.searchTerm = searchText.isEmpty ? "BitCoin" : searchText
+        self.refreshData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.hideKeyboard()
     }
 }

@@ -12,7 +12,7 @@ class Constants {
     static let screenHeight = UIScreen.main.bounds.height
     static let screenWidth = UIScreen.main.bounds.width
     static let defaultOffset = 20
-    static let perPage = "20"
+    static let perPage = 20
     static let defaultNavigationBarTitleFont = UIFont.getFont(type: .bold, size: 15)
     static let defaultCornerRadius = CGFloat(15)
     static let defaultIconSize = 30
