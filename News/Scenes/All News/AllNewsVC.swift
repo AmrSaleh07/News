@@ -83,6 +83,10 @@ extension AllNewsVC: UITableViewDataSource, UITableViewDelegate {
         cell.configureCell(article: newsVM.articles[indexPath.row])
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.navigationController?.pushViewController(instantiateVC(.articleDetails(article: newsVM.articles[indexPath.row])), animated: true)
+    }
 }
 
 // MARK: - UIScrollViewDelegate

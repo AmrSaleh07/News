@@ -43,6 +43,9 @@
 		E3B7740826A2CA0200356A73 /* NewsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B7740726A2CA0200356A73 /* NewsVM.swift */; };
 		E3B7744B26A2D5D600356A73 /* SourceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B7744A26A2D5D600356A73 /* SourceEntity.swift */; };
 		E3B7744E26A2D61D00356A73 /* ArticleEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B7744D26A2D61D00356A73 /* ArticleEntity.swift */; };
+		E3B7748026A2EDFF00356A73 /* ArticleDetailsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B7747F26A2EDFF00356A73 /* ArticleDetailsLayout.swift */; };
+		E3B7748326A2EE8C00356A73 /* ArticleDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B7748226A2EE8C00356A73 /* ArticleDetailsVC.swift */; };
+		E3B7748626A2EEF500356A73 /* ArticleDetailsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B7748526A2EEF500356A73 /* ArticleDetailsTVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +89,9 @@
 		E3B7740726A2CA0200356A73 /* NewsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsVM.swift; sourceTree = "<group>"; };
 		E3B7744A26A2D5D600356A73 /* SourceEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEntity.swift; sourceTree = "<group>"; };
 		E3B7744D26A2D61D00356A73 /* ArticleEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleEntity.swift; sourceTree = "<group>"; };
+		E3B7747F26A2EDFF00356A73 /* ArticleDetailsLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailsLayout.swift; sourceTree = "<group>"; };
+		E3B7748226A2EE8C00356A73 /* ArticleDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailsVC.swift; sourceTree = "<group>"; };
+		E3B7748526A2EEF500356A73 /* ArticleDetailsTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailsTVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,6 +267,7 @@
 				E3B773DD26A2C33B00356A73 /* Cells */,
 				E3B773D426A2C0A800356A73 /* AllNewsLayout.swift */,
 				E3B773DA26A2C1E700356A73 /* AllNewsVC.swift */,
+				E3B7747D26A2ECDE00356A73 /* Article Details */,
 			);
 			path = "All News";
 			sourceTree = "<group>";
@@ -269,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				E3B773FF26A2C3B500356A73 /* NewsTVC.swift */,
+				E3B7748526A2EEF500356A73 /* ArticleDetailsTVC.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -288,6 +296,15 @@
 				E3B7744D26A2D61D00356A73 /* ArticleEntity.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		E3B7747D26A2ECDE00356A73 /* Article Details */ = {
+			isa = PBXGroup;
+			children = (
+				E3B7747F26A2EDFF00356A73 /* ArticleDetailsLayout.swift */,
+				E3B7748226A2EE8C00356A73 /* ArticleDetailsVC.swift */,
+			);
+			path = "Article Details";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -406,6 +423,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3B7748626A2EEF500356A73 /* ArticleDetailsTVC.swift in Sources */,
 				E3B7725A26A2A24B00356A73 /* ViewController.swift in Sources */,
 				E3B772E126A2AF5900356A73 /* UIFontExtension.swift in Sources */,
 				E3B7732126A2B56A00356A73 /* APIRequestError.swift in Sources */,
@@ -420,11 +438,13 @@
 				E3B772E826A2AFD100356A73 /* AppLanguage.swift in Sources */,
 				E3B773D526A2C0A800356A73 /* AllNewsLayout.swift in Sources */,
 				E3B7744B26A2D5D600356A73 /* SourceEntity.swift in Sources */,
+				E3B7748026A2EDFF00356A73 /* ArticleDetailsLayout.swift in Sources */,
 				E3B772E426A2AF9D00356A73 /* Localization.swift in Sources */,
 				E3B7740026A2C3B500356A73 /* NewsTVC.swift in Sources */,
 				E3B7736326A2B91100356A73 /* NetworkProvider+HTTPMethods.swift in Sources */,
 				E3B772EB26A2AFFD00356A73 /* StringExtension.swift in Sources */,
 				E3B7739D26A2BE3000356A73 /* APIResponseDataArray.swift in Sources */,
+				E3B7748326A2EE8C00356A73 /* ArticleDetailsVC.swift in Sources */,
 				E3B7744E26A2D61D00356A73 /* ArticleEntity.swift in Sources */,
 				E3B772CB26A2AD7A00356A73 /* Constants.swift in Sources */,
 				E3B7736026A2B8DF00356A73 /* NetworkProvider+HTTPBody.swift in Sources */,

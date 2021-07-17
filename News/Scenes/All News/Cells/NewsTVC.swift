@@ -52,13 +52,20 @@ class NewsTVC: UITableViewCell {
         stackView.addArrangedSubview(typeAndDateLabel)
         return stackView
     }()
+    
+    lazy var gradientView: UIView = {
+        let view = UIView()
+        view.clipsToBounds = true
+        view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5699111729)
+        return view
+    }()
 }
 
 // MARK: - Methods
 extension NewsTVC {
     
-    /// Display story, news or event data in the cell.
-    /// - Parameter item: Data to display.
+    /// Display news data in the cell.
+    /// - Parameter article: Data to display.
     /// - Author: Amr Saleh.
     /// - Date: 17 July 2021.
     func configureCell(article: ArticleEntity) {
@@ -70,17 +77,6 @@ extension NewsTVC {
             attributedText.append(NSAttributedString(string: "  •  \(article.publishedAt ?? "")", attributes: [.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.getFont(type: .normal, size: 15)]))
             typeAndDateLabel.attributedText = attributedText
         }
-        applyGradient()
-    }
-    
-    /// Apply gradient to cell.
-    /// - Author: Amr Saleh.
-    /// - Date: 28 Jun 2021.
-    private func applyGradient() {
-        if (articleImageView.layer.sublayers ?? []).isEmpty {
-            let layer = UIHelper.applyGradient(frame: self.bounds, locations: [0, 1], startPoint: CGPoint(x: 0.5, y: 1), endPoint: CGPoint(x: 0.5, y: 0), colors: [#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.4960998131).cgColor, #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.08285219306).cgColor])
-            articleImageView.layer.insertSublayer(layer, at: 0)
-        }
     }
 }
 
@@ -89,13 +85,13 @@ extension NewsTVC: BaseLayoutDelegate {
     
     func setupViews() {
         contentView.addSubview(containerView)
-        containerView.addSubviews([articleImageView, stackView])
-        
+        containerView.addSubviews([articleImageView, gradientView])
+        gradientView.addSubview(stackView)
         
         containerView.snp.makeConstraints { (make) in
-            make.top.leading.equalToSuperview().offset(Constants.defaultOffset)
-            make.trailing.equalToSuperview().offset(-Constants.defaultOffset)
-            make.bottom.equalToSuperview()
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview().offset(Constants.defaultOffset)
+            make.bottom.trailing.equalToSuperview().offset(-Constants.defaultOffset)
             make.height.equalTo(200)
         }
         
@@ -103,9 +99,14 @@ extension NewsTVC: BaseLayoutDelegate {
             make.edges.equalToSuperview()
         }
         
+        gradientView.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview()
+            make.trailing.bottom.equalToSuperview()
+        }
+        
         stackView.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.bottom.equalToSuperview().offset(-16)
+            make.leading.top.equalToSuperview().offset(8)
+            make.bottom.trailing.equalToSuperview().offset(-8)
         }
     }
 }

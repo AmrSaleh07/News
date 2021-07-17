@@ -9,6 +9,7 @@ import UIKit
 
 enum VC {
     case home
+    case articleDetails(article: ArticleEntity)
 }
 
 /// Instantiate a ViewController with it's dependencies.
@@ -23,6 +24,10 @@ func instantiateVC(_ vc: VC) -> UIViewController {
     case .home:
         let vc = AllNewsVC()
         vc.newsVM = NewsVM()
+        return vc
+    case .articleDetails(let article):
+        let vc = ArticleDetailsVC()
+        vc.article = article
         return vc
     }
 }

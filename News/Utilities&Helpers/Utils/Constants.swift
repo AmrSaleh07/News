@@ -15,7 +15,7 @@ class Constants {
     static let perPage = 20
     static let defaultNavigationBarTitleFont = UIFont.getFont(type: .bold, size: 15)
     static let defaultCornerRadius = CGFloat(15)
-    static let defaultIconSize = 30
+    static let defaultIconSize = 20
     static let newsApiKey = "3ecb0535daca436cb1d3f9be93bb81dc"
     
     static let defaultTableViewHeaderAndFooterHeight = CGFloat(50)

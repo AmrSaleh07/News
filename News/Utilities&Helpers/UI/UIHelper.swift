@@ -33,4 +33,14 @@ class UIHelper {
         layer.colors = colors
         return layer
     }
+    
+    class func openExternalLinks(sourceURL: String) {
+        let application = UIApplication.shared
+        
+        if let finalUrl = URL(string: sourceURL) {
+          if application.canOpenURL(finalUrl) {
+             application.open(finalUrl, options: [:], completionHandler: nil)
+          }
+        }
+    }
 }
