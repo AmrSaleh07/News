@@ -19,7 +19,7 @@ extension NetworkProvider {
         switch endpoint {
         case .allNews(let page, let searchTerm):
             components.queryItems!.append(URLQueryItem(name: "page", value: String(page)))
-            components.queryItems!.append(URLQueryItem(name: "pageSize", value: Constants.perPage))
+            components.queryItems!.append(URLQueryItem(name: "pageSize", value: String(Constants.perPage)))
             if searchTerm != nil {
                 components.queryItems!.append(URLQueryItem(name: "q", value: searchTerm))
             }

@@ -38,6 +38,17 @@ extension AllNewsVC {
     /// - Author: Amr Saleh.
     /// - Date: 17 July 2021.
     @objc func refreshData() {
+        page = 1
+        newsVM.isRefreshingData = true
+        newsVM.isMoreDataAvailable = true
+        newsVM.getALlNews(page: page, searchTerm: searchTerm)
+    }
+    
+    /// Load more news from API.
+    /// - Author: Amr Saleh.
+    /// - Date: 17 July 2021.
+    func loadMoreData() {
+        page += 1
         newsVM.getALlNews(page: page, searchTerm: searchTerm)
     }
     
@@ -48,6 +59,7 @@ extension AllNewsVC {
 
         newsVM.didFetchArticles﻿Subject.asDriver().filter({$0}).drive(onNext: { [weak self] _ in
             self?.layout.refreshControl.endRefreshing()
+            self?.layout.tableView.tableFooterView?.isHidden = true
             self?.layout.tableView.reloadData()
         }).disposed(by: disposeBag)
     }
@@ -65,5 +77,17 @@ extension AllNewsVC: UITableViewDataSource, UITableViewDelegate {
         cell.selectionStyle = .none
         cell.configureCell(article: newsVM.articles[indexPath.row])
         return cell
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+extension AllNewsVC: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if scrollView == layout.tableView && (scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height {
+            if newsVM.isMoreDataAvailable {
+                loadMoreData()
+            }
+            layout.tableView.tableFooterView?.isHidden = !newsVM.isMoreDataAvailable
+        }
     }
 }

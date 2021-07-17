@@ -33,7 +33,6 @@ class NewsTVC: UITableViewCell {
         label.textColor = .white
         label.font = UIFont.getFont(type: .bold, size: 15)
         label.numberOfLines = 2
-        label.text = "title"
         return label
     }()
     
@@ -41,8 +40,17 @@ class NewsTVC: UITableViewCell {
         var label = UILabel()
         label.textColor = .white
         label.font = UIFont.getFont(type: .normal, size: 10)
-        label.text = "Date"
         return label
+    }()
+    
+    lazy var stackView : UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        stackView.alignment = .fill
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(typeAndDateLabel)
+        return stackView
     }()
 }
 
@@ -57,10 +65,11 @@ extension NewsTVC {
         
         articleImageView.setImage(url: article.urlToImage, placeholder: #imageLiteral(resourceName: "article card"))
         titleLabel.text = article.title
-//        let attributedText = NSMutableAttributedString(string: categories.joined(separator: ", "), attributes: [.foregroundColor: UIColor.News.red])
-//        attributedText.append(NSAttributedString(string: "  •  \(item.formattedPublishedAt?.uppercased() ?? "")", attributes: [.foregroundColor: UIColor.white]))
-//        typeAndDateLabel.attributedText = attributedText
-
+        if let sourceName = article.source?.name {
+            let attributedText = NSMutableAttributedString(string: sourceName, attributes: [.foregroundColor: UIColor.News.red, NSAttributedString.Key.font: UIFont.getFont(type: .bold, size: 15)])
+            attributedText.append(NSAttributedString(string: "  •  \(article.publishedAt ?? "")", attributes: [.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.getFont(type: .normal, size: 15)]))
+            typeAndDateLabel.attributedText = attributedText
+        }
         applyGradient()
     }
     
@@ -80,7 +89,7 @@ extension NewsTVC: BaseLayoutDelegate {
     
     func setupViews() {
         contentView.addSubview(containerView)
-        containerView.addSubviews([articleImageView, titleLabel, typeAndDateLabel])
+        containerView.addSubviews([articleImageView, stackView])
         
         
         containerView.snp.makeConstraints { (make) in
@@ -94,14 +103,9 @@ extension NewsTVC: BaseLayoutDelegate {
             make.edges.equalToSuperview()
         }
         
-        typeAndDateLabel.snp.makeConstraints { (make) in
+        stackView.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(16)
             make.trailing.bottom.equalToSuperview().offset(-16)
-        }
-        
-        titleLabel.snp.makeConstraints { (make) in
-            make.leading.trailing.equalTo(typeAndDateLabel)
-            make.bottom.equalTo(typeAndDateLabel.snp.top).offset(-8)
         }
     }
 }
