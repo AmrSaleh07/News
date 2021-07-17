@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Gloss
 
 /// Responsible for creating API requests
 class NetworkProvider {
@@ -20,7 +21,7 @@ class NetworkProvider {
     ///     containing the data and error type if exist.
     /// - Author: Amr Saleh.
     /// - Date: January 19, 2020.
-    class func request<DataType:Decodable>(for endpoint: EndPoints, responseType:DataType.Type, completion: @escaping (_ error:APIRequestError?, _ data:DataType?, _ validationError:[String:[String]]?) -> Void) {
+    class func request<DataType:Glossy>(for endpoint: EndPoints, responseType:DataType.Type, completion: @escaping (_ error:APIRequestError?, _ data:DataType?, _ validationError:[String:[String]]?) -> Void) {
 
         ///Check if url is in invalid format
         guard let url = urlComponents(for: endpoint).url else {
@@ -91,14 +92,6 @@ class NetworkProvider {
                         print("✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦")
                         completion(APIRequestError.validationError, nil, errors)
                     } else {
-//                        if let apiResponse = ServerErrorEntity(data: data!) {
-//                            print("❌ Error: \(APIRequestError.serverError(message: apiResponse.message ?? "").localizedDescription)")
-//                            print("✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦")
-//                            completion(APIRequestError.serverError(message: apiResponse.message ?? ""), nil, nil)
-//                        } else {
-//                            completion(APIRequestError.serverError(message: "ServerDown".localized), nil, nil)
-//                            UIHelper.makeToast(text: "ServerDown".localized)
-//                        }
                     }
                      return
                 }
@@ -106,7 +99,7 @@ class NetworkProvider {
             
             ///Check for Invalid mimeType
             print("🔷 MIME: \(String(describing: response?.mimeType))")
-            if let mime = response?.mimeType, mime != "application/json", mime != "text/html" {
+            if let mime = response?.mimeType, mime != "application/json" {
                 print("❌ Error: \(APIRequestError.invalidMIME(mime: mime).localizedDescription)")
                 print("✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦")
                 completion(APIRequestError.invalidMIME(mime: mime), nil, nil)
@@ -120,17 +113,18 @@ class NetworkProvider {
                 completion(APIRequestError.nilData, nil, nil)
                 return
             }
-
-            do {
-                let apiResponse = try JSONDecoder().decode(DataType.self, from: data!)
+            
+            ///Parsing data to a valid format
+            if let apiResponse = DataType(data: data!) {
+                //print("✅ Data: \(apiResponse)")
                 print("✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦")
                 completion(nil, apiResponse, nil)
-            } catch {
+                
+            } else {
                 print("❌ Error: \(APIRequestError.parsingError.localizedDescription)")
                 print("✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦")
                 completion(APIRequestError.parsingError, nil, nil)
             }
-            
             return
             }.resume()
     }

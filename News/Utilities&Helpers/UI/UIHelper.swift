@@ -23,4 +23,14 @@ class UIHelper {
             NVActivityIndicatorPresenter.sharedInstance.stopAnimating(nil)
         }
     }
+    
+    class func applyGradient(frame: CGRect, locations: [NSNumber], startPoint: CGPoint, endPoint: CGPoint, colors: [CGColor]) -> CAGradientLayer {
+        let layer = CAGradientLayer()
+        layer.frame = frame
+        layer.locations = locations
+        layer.startPoint = startPoint
+        layer.endPoint = endPoint
+        layer.colors = colors
+        return layer
+    }
 }

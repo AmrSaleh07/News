@@ -12,4 +12,5 @@ target 'News' do
   pod 'RxCocoa'
   pod 'NVActivityIndicatorView/Extended'
   pod 'DeviceKit'
+  pod 'Gloss'
 end

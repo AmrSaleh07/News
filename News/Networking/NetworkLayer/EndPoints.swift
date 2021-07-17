@@ -9,7 +9,7 @@
 enum EndPoints {
     
     // Authentication
-    case allNews
+    case allNews(page: Int, searchTerm: String? = nil)
     
     func value() -> String {
         switch self {

@@ -21,7 +21,8 @@ func instantiateVC(_ vc: VC) -> UIViewController {
     
     switch vc {
     case .home:
-        let vc = ViewController()
+        let vc = AllNewsVC()
+        vc.newsVM = NewsVM()
         return vc
     }
 }

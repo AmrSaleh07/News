@@ -34,7 +34,7 @@ public struct Environment {
     ///
     /// - Parameter key: .plist key.
     /// - Returns: value for the key.
-    /// - Author: Shimaa Nagah.
+    /// - Author: Amr Saleh.
     /// - Date: Dec 18, 2020.
     func configuration(_ key: PlistKey) -> String {
         switch key {
